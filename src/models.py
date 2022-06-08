@@ -19,42 +19,29 @@ class Usuarios(Base):
     password = Column(String(10), nullable=False)
     fecha_subscripcion = Column(String(10), nullable=False)
 
-class Personajes(Base):
-    __tablename__ = 'Personajes'
+class Comment(Base):
+    __tablename__ = 'Comment'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    info = Column(String(250), nullable=False)
+    comment_text = Column(String(250), nullable=False)
+    Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
+    Post_id = Column(Integer, ForeignKey('Post.id'))
 
-class Vehiculos(Base):
-    __tablename__ = 'Vehiculos'
+class Post(Base):
+    __tablename__ = 'Post'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    info = Column(String(250), nullable=False)
-
-class Planetas(Base):
-    __tablename__ = 'Planetas'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    info = Column(String(250), nullable=False)
-
-class Vehiculos_Favoritos(Base):
-    __tablename__ = 'Vehiculos_Favoritos'
-    id = Column(Integer, primary_key=True)
-    Vehiculo_id = Column(Integer, ForeignKey('Vehiculos.id'))
     Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
 
-class Planetas_Favoritos(Base):
-    __tablename__ = 'Planetas_Favoritos'
+class Media(Base):
+    __tablename__ = 'Media'
     id = Column(Integer, primary_key=True)
-    Vehiculo_id = Column(Integer, ForeignKey('Planetas.id'))
-    Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
+    type = Column(Number, nullable=False)
+    url = Column(String(250), nullable=False)
+    Post_id = Column(Integer, ForeignKey('Post.id'))
 
-class Personajes_Favoritos(Base):
-    __tablename__ = 'Personajes_Favoritos'
-    id = Column(Integer, primary_key=True)
-    Vehiculo_id = Column(Integer, ForeignKey('Personajes.id'))
-    Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
-
+class Follower(Base):
+    __tablename__ = 'Post'
+    user_from_id = Column(Integer, ForeignKey('Usuarios.id'))
+    user_to_id = Column(Integer, ForeignKey('Usuarios.id'))
 
     def to_dict(self):
         return {}
