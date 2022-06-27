@@ -42,18 +42,24 @@ class Vehiculos_Favoritos(Base):
     id = Column(Integer, primary_key=True)
     Vehiculo_id = Column(Integer, ForeignKey('Vehiculos.id'))
     Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
+    vehiculo = relationship(Vehiculos)
+    usuario = relationship(Usuarios)
 
 class Planetas_Favoritos(Base):
     __tablename__ = 'Planetas_Favoritos'
     id = Column(Integer, primary_key=True)
-    Vehiculo_id = Column(Integer, ForeignKey('Planetas.id'))
+    Planetas_id = Column(Integer, ForeignKey('Planetas.id'))
     Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
+    planeta = relationship(Planetas)
+    usuario = relationship(Usuarios)
 
 class Personajes_Favoritos(Base):
     __tablename__ = 'Personajes_Favoritos'
     id = Column(Integer, primary_key=True)
-    Vehiculo_id = Column(Integer, ForeignKey('Personajes.id'))
+    Personajes_id = Column(Integer, ForeignKey('Personajes.id'))
     Usuario_id = Column(Integer, ForeignKey('Usuarios.id'))
+    personaje = relationship(Personajesgit add)
+    usuario = relationship(Usuarios)
 
 
     def to_dict(self):
